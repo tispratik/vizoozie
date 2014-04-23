@@ -61,8 +61,8 @@ class VizOozie(object):
             to_ok = self.getTo(ok)
             to_error = self.getTo(e)
             output += '\n'+name.replace('-', '_') + " [shape=box,style=filled,color=" + color + "];\n"
-            output += '\n'+name.replace('-', '_') + " -> " + to_ok.replace('-', '_') + " [fontsize=40,label=ok];\n"
-            output += '\n'+name.replace('-', '_') + " -> " + to_error.replace('-', '_') + " [fontsize=40,label=err];\n"
+            output += '\n'+name.replace('-', '_') + " -> " + to_ok.replace('-', '_') + " [fontsize=40,label=ok,color=green];\n"
+            output += '\n'+name.replace('-', '_') + " -> " + to_error.replace('-', '_') + " [fontsize=40,label=err,color=red];\n"
         return output
     
     def processFork(self, doc):
