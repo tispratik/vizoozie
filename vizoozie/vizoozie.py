@@ -29,9 +29,15 @@ class VizOozie(object):
     def getOK(self, node):
         ok = node.getElementsByTagName("ok")[0]
         return ok
-    
+
+    def getError(self, node):
+        e = node.getElementsByTagName("error")[0]
+        return e
+
     def processHeader(self, name):
-        output = "digraph{\nsize = \"8,8\";ratio=fill;node[fontsize=24];labelloc=\"t\";label=\"" + name + "\";\n"
+        parts = name.split('/')
+        wf_name = parts[-2]
+        output = "digraph{\nsize = \"8,8\";ratio=fill;node[fontsize=40];labelloc=\"t\";fontsize=80;label=\"" + wf_name + "\";\n"
         return output
 
     def processStart(self, doc):
@@ -51,9 +57,12 @@ class VizOozie(object):
                     color = value
                     break
             ok = self.getOK(node)
-            to = self.getTo(ok)
+            e = self.getError(node)
+            to_ok = self.getTo(ok)
+            to_error = self.getTo(e)
             output += '\n'+name.replace('-', '_') + " [shape=box,style=filled,color=" + color + "];\n"
-            output += '\n'+name.replace('-', '_') + " -> " + to.replace('-', '_') + ";\n"
+            output += '\n'+name.replace('-', '_') + " -> " + to_ok.replace('-', '_') + " [fontsize=40,label=ok];\n"
+            output += '\n'+name.replace('-', '_') + " -> " + to_error.replace('-', '_') + " [fontsize=40,label=err];\n"
         return output
     
     def processFork(self, doc):
