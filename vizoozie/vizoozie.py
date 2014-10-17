@@ -56,7 +56,7 @@ class VizOozie(object):
                 if len(node.getElementsByTagName(key)) != 0:
                     if 'DoneMarker' in name:
                         color = 'cyan'
-                    if 'Poll' in name:
+                    elif 'Poll' in name:
                         color = 'red'
                     else:
                         color = value
