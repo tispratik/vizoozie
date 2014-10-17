@@ -54,7 +54,10 @@ class VizOozie(object):
             color = "white"
             for key, value in self.properties.iteritems():
                 if len(node.getElementsByTagName(key)) != 0:
-                    color = value
+                    if 'DoneMarker' in name:
+                        color = 'cyan'
+                    else:
+                        color = value
                     break
             ok = self.getOK(node)
             e = self.getError(node)
